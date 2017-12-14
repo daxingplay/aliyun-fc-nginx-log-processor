@@ -1,0 +1,29 @@
+{
+  "name": "aliyun-fc-nginx-log-processor",
+  "version": "1.0.0",
+  "description": "Serverless log processor for processing NGINX log collected by fluentd from docker containers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daxingplay/aliyun-fc-nginx-log-processor.git"
+  },
+  "keywords": [
+    "serverless",
+    "aliyun",
+    "fc",
+    "nginx"
+  ],
+  "author": "daxingplay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daxingplay/aliyun-fc-nginx-log-processor/issues"
+  },
+  "homepage": "https://github.com/daxingplay/aliyun-fc-nginx-log-processor#readme",
+  "dependencies": {
+    "aliyun-sdk": "^1.10.19",
+    "co": "^4.6.0"
+  }
+}
