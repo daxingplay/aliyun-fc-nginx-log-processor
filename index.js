@@ -119,14 +119,16 @@ function processLogs(targetSLS, targetConfig, logObj) {
 
 
 module.exports.handler = function (event, context, callback) {
-  console.info('event %s', event);
-  console.info('context', context);
 
   var config = JSON.parse(event.toString());
   var sourceConfig = config.source;
   var targetConfig = config.parameter.target;
 
   console.setLogLevel(config.parameter.logLevel || 'error');
+  
+  console.info('event', config);
+  console.info('context', context);
+  
   if (!targetConfig) {
     callback(new Error('target config not valid.'));
   }
