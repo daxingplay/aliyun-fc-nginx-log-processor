@@ -72,7 +72,7 @@ function processLogs(targetSLS, targetConfig, logObj) {
       return arr;
     }, []);
 
-    console.log('log contents, %o', logContents);
+    console.info('log contents, %o', logContents);
 
     if (logContents.length) {
       var logGroup = {
@@ -95,10 +95,10 @@ function processLogs(targetSLS, targetConfig, logObj) {
         }, function (err, data) {
   
           if (err) {
-            console.log('error:', err);
+            console.error('error:', err);
             reject(err);
           } else {
-            console.log('log wrote to %s', logStore);
+            console.info('log wrote to %s', logStore);
             resolve({
               log: logContents,
               res: data,
@@ -107,11 +107,11 @@ function processLogs(targetSLS, targetConfig, logObj) {
   
         });
       } else {
-        console.log('no log store specied. skip');
+        console.info('no log store specied. skip');
         resolve();
       }
     } else {
-      console.log('empty log: %s', JSON.stringify(log));
+      console.info('empty log: %s', JSON.stringify(log));
       resolve();
     }
   });
@@ -126,6 +126,7 @@ module.exports.handler = function (event, context, callback) {
   var sourceConfig = config.source;
   var targetConfig = config.parameter.target;
 
+  console.setLogLevel(targetConfig.parameter.logLevel || 'error');
   if (!targetConfig) {
     callback(new Error('target config not valid.'));
   }
@@ -138,7 +139,7 @@ module.exports.handler = function (event, context, callback) {
 
     while (nextCursor) {
       var ret = yield pullLogs(sourceSLS, sourceConfig, nextCursor);
-      console.log('got log group list. length: ', ret.data.length);
+      console.info('got log group list. length: ', ret.data.length);
       var logs = ret.data.reduce(function (arr, logGroup) {
         return arr.concat(logGroup.logs.map(function (log) {
           var logObj = {
@@ -146,7 +147,7 @@ module.exports.handler = function (event, context, callback) {
             topic: logGroup.topic,
             log: log,
           };
-          console.log('got log: ', JSON.stringify(logObj));
+          console.info('got log: ', JSON.stringify(logObj));
           return logObj;
         }));
       }, []);

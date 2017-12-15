@@ -14,6 +14,7 @@ Serverless log processor for processing NGINX log collected by fluentd from dock
     "errorLogStore": "error log store name, optional",
     "logStore": "target log store name",
     "project": "project name"
-  }
+  },
+  "logLevel": "error",
 }
 ```
