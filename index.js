@@ -126,7 +126,7 @@ module.exports.handler = function (event, context, callback) {
   var sourceConfig = config.source;
   var targetConfig = config.parameter.target;
 
-  console.setLogLevel(targetConfig.parameter.logLevel || 'error');
+  console.setLogLevel(config.parameter.logLevel || 'error');
   if (!targetConfig) {
     callback(new Error('target config not valid.'));
   }
